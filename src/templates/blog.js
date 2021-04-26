@@ -2,20 +2,10 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { BLOCKS, MARKS } from "@contentful/rich-text-types"
+import { BLOCKS, INLINES } from "@contentful/rich-text-types"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import Head from '../components/head'
-// export const query = graphql`
-//   query($slug: String!) {
-//     markdownRemark(fields: { slug: { eq: $slug } }) {
-//       frontmatter {
-//         title
-//         date
-//       }
-//       html
-//     }
-//   }
-// `
+import * as blogStyle from './blog.module.scss'
 
 export const query = graphql`
   query($slug: String!) {
@@ -28,9 +18,8 @@ export const query = graphql`
       raw
       references {
         ... on ContentfulAsset {
-          fixed {
-            src
-          }
+          title
+          description
           contentful_id
           __typename
           gatsbyImageData(width: 200)
@@ -40,8 +29,8 @@ export const query = graphql`
   }
 }
 `
-const Bold = ({ children }) => <span className="bold">{children}</span>
-const Text = ({ children }) => <p className="align-center">{children}</p>
+
+const Links = (props) => <a href={props.uri} className={blogStyle.links}>{props.children}</a>
 
 
 const Blog = (props) => {
@@ -51,10 +40,10 @@ const Blog = (props) => {
 
   const options = {
     renderNode: {
+      [INLINES.HYPERLINK]: (node, children) => <Links uri={node.data.uri}>{children}</Links>,
       [BLOCKS.EMBEDDED_ASSET]: node => {
         const image = getImage(node.data.target)
-        console.log( node)
-        return<GatsbyImage image={image} alt="luck" />
+        return<GatsbyImage image={image} alt={node.data.target.title} />
       }
     }
   }
