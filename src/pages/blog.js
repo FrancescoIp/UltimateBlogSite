@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/layout'
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
@@ -23,13 +23,60 @@ const BlogPage = () => {
   }
 }
   `)
+
+  const allPosts = data.allContentfulBlogPost.edges
+  
+  const emptyQuery = ""
+  const [state, setState] = useState({
+    filteredData: [],
+    query: emptyQuery,
+  })
+  
  
+  // const[postShownNumber, setPostShownNumber] = useState(allPosts.lenght)
+  const handleInputChange = event => {
+    const query = event.target.value
+
+    const posts = data.allContentfulBlogPost.edges || []
+
+    const filteredData = posts.filter(post => {
+      const { title, slug } = post.node
+      return (
+        // standardize data with .toLowerCase()
+        slug.toLowerCase().includes(query.toLowerCase()) ||
+        title.toLowerCase().includes(query.toLowerCase())
+      )
+    })
+
+    setState({
+      query, 
+      filteredData, 
+    })
+  }
+
+  const { filteredData, query } = state
+  const hasSearchResults = filteredData && query !== emptyQuery
+  const posts = hasSearchResults ? filteredData : allPosts
+  const [postShowing, setPostShowing] = useState(posts.length)
+  useEffect(() => {
+    setPostShowing(posts.length)
+  }, [posts])
+
   return (
     <Layout>
       <Head title="Blog" />
       <h1>Blog</h1>
+      <div>
+      <input
+        type="text"
+        aria-label="Search"
+        placeholder="Type to filter posts..."
+        onChange={handleInputChange}
+      />
+      <span className={blogStyle.numberPostShown}>Posts displayed: {postShowing}</span>
+      </div>
       <ol className={blogStyle.posts}>
-        {data.allContentfulBlogPost.edges.map((edge) => {
+        {posts.map((edge) => {
           const image = getImage(edge.node.immagineCopertina)
           return (
             <li className={blogStyle.post} key={edge.node.title}>
@@ -47,14 +94,3 @@ const BlogPage = () => {
 }
 
 export default BlogPage
-
-// render() {
-//   const data =[{"name":"test1"},{"name":"test2"}];
-//   return (
-//     <div>
-//     {data.map(function(d, idx){
-//        return (<li key={idx}>{d.name}</li>)
-//      })}
-//     </div>
-//   );
-// }

@@ -32,7 +32,6 @@ export const query = graphql`
 
 const Links = (props) => <a href={props.uri} className={blogStyle.links}>{props.children}</a>
 
-
 const Blog = (props) => {
   
   const post = props.data.contentfulBlogPost.body
