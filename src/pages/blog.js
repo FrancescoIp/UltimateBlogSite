@@ -16,7 +16,7 @@ const BlogPage = () => {
         slug
         publishedDate(formatString:"MMMM Do, YYYY")
         immagineCopertina {
-          gatsbyImageData(width: 800)
+          gatsbyImageData(width: 200)
         }
       }
     }
