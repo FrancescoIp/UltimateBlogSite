@@ -4,6 +4,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as blogStyle from './blog.module.scss'
 import Head from '../components/head'
+import FilterInput from '../modules/filterInput'
 
 
 const BlogPage = () => {
@@ -32,8 +33,6 @@ const BlogPage = () => {
     query: emptyQuery,
   })
   
- 
-  // const[postShownNumber, setPostShownNumber] = useState(allPosts.lenght)
   const handleInputChange = event => {
     const query = event.target.value
 
@@ -66,15 +65,11 @@ const BlogPage = () => {
     <Layout>
       <Head title="Blog" />
       <h1>Blog</h1>
-      <div>
-      <input
-        type="text"
-        aria-label="Search"
-        placeholder="Type to filter posts..."
-        onChange={handleInputChange}
+      <FilterInput
+        handleInputChange={handleInputChange}
+        cName={blogStyle.numberPostShown}
+        postShowing={postShowing}
       />
-      <span className={blogStyle.numberPostShown}>Posts displayed: {postShowing}</span>
-      </div>
       <ol className={blogStyle.posts}>
         {posts.map((edge) => {
           const image = getImage(edge.node.immagineCopertina)
