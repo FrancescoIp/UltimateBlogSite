@@ -3,7 +3,7 @@ import Layout from '../components/layout'
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as blogStyle from './blog.module.scss'
-import Head from '../components/head'
+import Seo from '../components/seo.js'
 import FilterInput from '../modules/filterInput'
 
 
@@ -63,7 +63,10 @@ const BlogPage = () => {
 
   return (
     <Layout>
-      <Head title="Blog" />
+      <Seo 
+        title="Blog" 
+        description="Qui trovi tutti gli articoli suddivisi per categorie che raccontano della nostra bellissima città e non solo!" 
+      />
       <h1>Blog</h1>
       <FilterInput
         handleInputChange={handleInputChange}

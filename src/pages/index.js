@@ -2,46 +2,32 @@ import React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from '../components/layout'
-import Head from '../components/head'
+import Seo from '../components/seo.js'
 
 export const query = graphql`
-  query{
-    contentfulBlogPost {
-      title
-      id
-      slug
-      immagineCopertina {
-        gatsbyImageData(width: 800)
-      }
-    }
+  query {
+  contentfulAsset(title: { eq: "piazzaduomo" }) {
+    title
+    gatsbyImageData(
+      width: 900
+      height: 600
+      placeholder: BLURRED
+      layout: FULL_WIDTH
+      formats: [AUTO, WEBP]
+    )
   }
+}
 
 `
 
 function Home({ data }) {
-  const image = getImage(data.contentfulBlogPost.immagineCopertina)
+  const image = getImage(data.contentfulAsset)
   return (
     <Layout>
-      <Head title="Home"/>
-      <h2>{data.contentfulBlogPost.title}</h2>
-      <GatsbyImage image={image} alt={data.contentfulBlogPost.slug} />
-      <p>booty</p>
+      <Seo title="Home"/>
+      <GatsbyImage image={image} alt={data.contentfulAsset.title} />
     </Layout>
   )
 }
 
 export default Home
-
-// export default function Home() {
-//   return <div>
-//     <h1>Hello world!</h1>
-//     <StaticImage
-//       src="../images/palm-tree.jpg"
-//       width={1000}
-//       alt="Palm Tree"
-//     // placeholder="tracedSVG"
-//     // quality="40"
-//     // transformOptions={{ grayscale: true }}
-//     />
-//   </div>
-// }

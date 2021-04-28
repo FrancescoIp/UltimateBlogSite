@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Layout from '../components/layout'
-import Head from '../components/head'
+import Seo from '../components/seo.js'
 
 const ContactUsPage = () => {
   return (
     <Layout>
-      <Head title="Contacts" />
+      <Seo title="Contacts" description="Qui trovi i contatti utili per comunicare con noi" />
       <h1>Contact Us</h1>
       <h2>Not to frequently</h2>
       <h3>We are very busy you know..</h3>

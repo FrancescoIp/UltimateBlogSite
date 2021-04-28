@@ -4,7 +4,7 @@ import Layout from '../components/layout';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { BLOCKS, INLINES } from "@contentful/rich-text-types"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
-import Head from '../components/head'
+import Seo from '../components/seo.js'
 import * as blogStyle from './blog.module.scss'
 
 export const query = graphql`
@@ -49,7 +49,7 @@ const Blog = (props) => {
 
   return (
     <Layout>
-      <Head title={props.data.contentfulBlogPost.title} />
+      <Seo title={props.data.contentfulBlogPost.title} />
       <h1>{props.data.contentfulBlogPost.title}</h1>
       <p>{props.data.contentfulBlogPost.publishedDate}</p>
       {renderRichText(props.data.contentfulBlogPost.body, options)}

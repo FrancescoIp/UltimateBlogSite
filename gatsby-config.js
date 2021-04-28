@@ -7,7 +7,11 @@
 module.exports = {
   siteMetadata: {
     title: 'Titolo Bello',
-    author: 'Fripp'
+    description: 'description to add according to what the site is talking about',
+    author: 'Fripp',
+    keywords: `Termini, Imerese, Sicilia, blog, città`,
+    url:"https:// quella del sito",
+    image: `src/images/home/termini.jpg`
   },
   /* Your site config here */
   plugins: [
