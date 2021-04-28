@@ -1,32 +1,45 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import Layout from '../components/layout'
+import { Parallax } from "react-parallax";
 import Seo from '../components/seo.js'
+import Header from '../components/header'
+import Footer from '../components/footer'
+import * as layoutStyles from '../components/layout.module.scss'
+import img2 from '../images/home/termini.jpg'
 
 export const query = graphql`
   query {
   contentfulAsset(title: { eq: "piazzaduomo" }) {
     title
-    gatsbyImageData(
-      width: 900
-      height: 600
-      placeholder: BLURRED
-      layout: FULL_WIDTH
-      formats: [AUTO, WEBP]
-    )
+    file{
+      url
+    }
   }
 }
 
 `
 
+const parallaxImgStyle = {
+  maxWidth: "fit-content"
+}
+
+
 function Home({ data }) {
-  const image = getImage(data.contentfulAsset)
   return (
-    <Layout>
-      <Seo title="Home"/>
-      <GatsbyImage image={image} alt={data.contentfulAsset.title} />
-    </Layout>
+    <>
+      <Seo title="Home" />
+      <div className={layoutStyles.container}>
+        <div className={layoutStyles.content}>
+          <Header />
+        </div>
+      </div>
+      <Parallax bgImage={img2} bgImageStyle={parallaxImgStyle} strength={500}>
+        <div style={{ height: 500 }}/>
+      </Parallax>
+      <div className={layoutStyles.container}>
+        <Footer />
+      </div>
+    </>
   )
 }
 

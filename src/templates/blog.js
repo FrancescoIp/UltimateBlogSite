@@ -30,13 +30,10 @@ export const query = graphql`
 }
 `
 
-const Links = (props) => <a href={props.uri} className={blogStyle.links}>{props.children}</a>
+const Links = ({uri, children}) => <a href={uri} className={blogStyle.links}>{children}</a>
 
 const Blog = (props) => {
   
-  const post = props.data.contentfulBlogPost.body
-  console.log(post)
-
   const options = {
     renderNode: {
       [INLINES.HYPERLINK]: (node, children) => <Links uri={node.data.uri}>{children}</Links>,
