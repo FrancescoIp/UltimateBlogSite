@@ -1,11 +1,12 @@
 .header {
   padding: 1rem 0 3rem;
-}
-
-.title {
-  color: #000000;
-  font-size: 3rem;
-  text-decoration: none;
+  img{ 
+    margin-bottom: -4rem;
+    @media (min-width: 45rem) {
+      width: 18rem;
+      margin-bottom: -3rem;
+    }
+  }
 }
 
 .nav-list {
@@ -16,7 +17,10 @@
 
 .nav-item {
   color: #999999;
-  font-size: .9rem;
+  font-size: 1.3rem;
+  @media (min-width: 45rem) {
+    font-size: 1.9rem;
+  }
   margin-right: 1.3rem;
   text-decoration: none;
 }
@@ -27,4 +31,9 @@
 
 .active-nav-item {
   color: #333333
+}
+
+.nav-menu, .nav-logo {
+  display: flex;
+  justify-content: space-around;
 }
