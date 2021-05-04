@@ -1,9 +1,10 @@
 import React from 'react'
+import * as stayleParallax from './parallax.module.scss'
 
-const CustomParallax = () => {
+const Parallax = () => {
   return(
-    <div className="parallax"/>
+    <div className={stayleParallax.parallax}/>
   )
 }
 
-export default CustomParallax
+export default Parallax

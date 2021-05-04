@@ -11,6 +11,10 @@ const Sidebar = () => {
         Home
       </Link>
 
+      <Link className="menu-item" to="/events">
+        Eventi
+      </Link>
+
       <Link className="menu-item" to="/about">
         About
       </Link>

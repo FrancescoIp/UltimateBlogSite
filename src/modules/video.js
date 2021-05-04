@@ -1,11 +1,11 @@
 import React from "react"
+import './video.scss'
+
 const Video = ({ videoSrcURL, videoTitle, width, height, ...props }) => (
-  <div className="video">
+  <div className='video-container'>
     <iframe
       src={videoSrcURL}
       title={videoTitle}
-      width={width}
-      height={height}
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       frameBorder="0"
       webkitallowfullscreen="true"

@@ -15,6 +15,7 @@ const BlogPage = () => {
       node {
         title
         slug
+        mostrare
         publishedDate(formatString:"MMMM Do, YYYY")
         immagineCopertina {
           gatsbyImageData(width: 200)
@@ -26,13 +27,13 @@ const BlogPage = () => {
   `)
 
   const allPosts = data.allContentfulBlogPost.edges
-  
+
   const emptyQuery = ""
   const [state, setState] = useState({
     filteredData: [],
     query: emptyQuery,
   })
-  
+
   const handleInputChange = event => {
     const query = event.target.value
 
@@ -48,24 +49,27 @@ const BlogPage = () => {
     })
 
     setState({
-      query, 
-      filteredData, 
+      query,
+      filteredData,
     })
   }
 
   const { filteredData, query } = state
   const hasSearchResults = filteredData && query !== emptyQuery
   const posts = hasSearchResults ? filteredData : allPosts
-  const [postShowing, setPostShowing] = useState(posts.length)
+  const polishedPosts = posts.filter(post => {
+    return (post.node.slug !== null && post.node.mostrare)
+  })
+  const [postShowing, setPostShowing] = useState(polishedPosts.length)
   useEffect(() => {
-    setPostShowing(posts.length)
-  }, [posts])
+    setPostShowing(polishedPosts.length)
+  }, [polishedPosts])
 
   return (
     <Layout>
-      <Seo 
-        title="Blog" 
-        description="Qui trovi tutti gli articoli suddivisi per categorie che raccontano della nostra bellissima città e non solo!" 
+      <Seo
+        title="Blog"
+        description="Qui trovi tutti gli articoli suddivisi per categorie che raccontano della nostra bellissima città e non solo!"
       />
       <h1>Blog</h1>
       <FilterInput
@@ -74,7 +78,7 @@ const BlogPage = () => {
         postShowing={postShowing}
       />
       <ol className={blogStyle.posts}>
-        {posts.map((edge) => {
+        {polishedPosts.map((edge) => {
           const image = getImage(edge.node.immagineCopertina)
           return (
             <li className={blogStyle.post} key={edge.node.title}>
