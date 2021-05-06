@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import * as headerStyles from './header.module.scss'
-import Logo from '../images/home/LOGO.png'
+import Logo from '../images/home/LOGOsm.png'
 
 const Header = () => {
   // Title been switched for a LOGO

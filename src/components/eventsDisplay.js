@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import './eventsDisplay.scss'
 
 
-const EventDisplay = ({ index, titolo, data, location, slug }) => {
+const EventDisplay = ({ expired, index, titolo, data, location, slug }) => {
   const titoloToShow = titolo ? titolo : 'titolo prova'
   const dataToShow = data ? data : 'data prova'
   const locationToShow = location ? location : 'location prova'
@@ -14,6 +14,7 @@ const EventDisplay = ({ index, titolo, data, location, slug }) => {
           <h3>Titolo: {titoloToShow}</h3>
           <p>Data: {dataToShow}</p>
           <p>Dove?: {locationToShow}</p>
+          {expired && <p style={{color:"red"}}>Evento Finito</p>}
         </Link>
       </li>
     )
@@ -24,6 +25,7 @@ const EventDisplay = ({ index, titolo, data, location, slug }) => {
         <h3>{titoloToShow}</h3>
         <p>{dataToShow}</p>
         <p>{locationToShow}</p>
+        {expired && <p style={{color:"red"}}>Evento Finito</p>}
       </div>
     </li>
   )

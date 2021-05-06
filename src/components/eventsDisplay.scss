@@ -1,5 +1,8 @@
-.post1, .post2 {
+.post {
   margin: 1rem 0;
+  @media (min-width: 45rem) {
+    margin: 0 0 1rem 0;
+  }
   a{
     background: rgb(122, 122, 122);
     color: #000000;

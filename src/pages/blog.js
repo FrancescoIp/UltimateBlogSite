@@ -83,9 +83,13 @@ const BlogPage = () => {
           return (
             <li className={blogStyle.post} key={edge.node.title}>
               <Link to={`/blog/${edge.node.slug}`}>
-                <GatsbyImage image={image} alt={edge.node.slug} />
-                <h2>{edge.node.title}</h2>
-                <p>{edge.node.publishedDate}</p>
+                <div className={blogStyle.postDataContainer}>
+                  <GatsbyImage image={image} alt={edge.node.slug} />
+                  <div className={blogStyle.datiPost}>
+                    <h2>{edge.node.title}</h2>
+                    <p>{edge.node.publishedDate}</p>
+                  </div>
+                </div>
               </Link>
             </li>
           )
