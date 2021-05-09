@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Calendar from 'react-calendar'
 import { graphql, useStaticQuery } from 'gatsby';
+import moment from 'moment';
 
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -25,71 +26,50 @@ const Events = () => {
         mostrare
         location
         titoloEvento
-        dataEventoShort: dataEvento(formatString: "YYYY-M-D")
-        dataEventoAll: dataEvento(formatString: "MMMM Do HH:mm, YYYY")
+        dataEvento(formatString:"YYYY-MM-DD")
       }
     }
   }
 }
   `)
 
-  
-  
-  const today = new Date()
+  const todayM = moment().format("YYYY-MM-DD")
   const allPosts = data.allContentfulBlogPost.edges
+  const [chosenDate, setChosenDate] = useState(todayM)
 
-  const [chosenDate, setChosenDate] = useState(today)
-  
   const changeDay = () => {
-    const closestDayWithEvents = getFullDate(firstDayWithEvents)
-    setChosenDate(closestDayWithEvents)
+    setChosenDate(firstDayWithEvents)
   }
 
-  const getFullDate = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const fullDate = year + '-' + month + '-' + day
-    return (
-      fullDate
-    )
-  }
-  const inverseGetFullDate = (date) => {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    const fullDate = `${day===1?"l' ":"il "}${day} - ${month} - ${year}`
-    return (
-      fullDate
-    )
+  const dynamicDate = (date) => {
+    const theDate = moment(date).format("D-MM-YYYY")
+    const isTheFirst = moment(date).format("D")
+    return `${isTheFirst ? "l' " : "il "}${theDate}`
   }
 
-  const allEventsDates = allPosts.reduce((accumulator, currentEvent) => {
-    if (currentEvent.node.evento) {
-      accumulator.push(currentEvent.node.dataEventoShort )
+  const allDatesAfterYesteday = allPosts.reduce((accumulator, currentEvent) => {
+    if (currentEvent.node.evento && moment(todayM).isSameOrBefore(currentEvent.node.dataEvento)) {
+      accumulator.push(currentEvent.node.dataEvento)
     }
-    return accumulator
+    return accumulator.sort((a, b) => a - b)
   }, [])
 
-  const allEventsDateFormatAfterToday = allEventsDates.reduce((accumulator, currentDate)=>{
-     if(new Date(currentDate)>= today){
-       accumulator.push(new Date(currentDate))
-     }
-     return accumulator.sort((a,b)=>a-b)
-  }, [])
-  const firstDayWithEvents = allEventsDateFormatAfterToday[0]
+  const firstDayWithEvents = allDatesAfterYesteday[0]
 
   const eventsToShow = allPosts.filter(event => {
-    return (event.node.evento && event.node.dataEventoShort === chosenDate)
+    return (event.node.evento && moment(event.node.dataEvento).isSame(chosenDate))
   })
 
   const NoEventsToShow = () => {
     return (
       <div style={{ marginTop: "1rem", textAlign: "center" }}>
         <h4>Nessun evento in programma per oggi.</h4>
-        <p>Prossimo evento <button id="goToDate" onClick={changeDay}>{inverseGetFullDate(firstDayWithEvents)}</button></p>
+        <p>Prossimo evento
+          <button id="goToDate" onClick={changeDay}>
+            {dynamicDate(firstDayWithEvents)}
+          </button>
+        </p>
       </div>
-
     )
   }
 
@@ -108,12 +88,11 @@ const Events = () => {
       <div className="calendar-events-container">
         <Calendar
           tileClassName={({ date }) => {
-            const fullDate = getFullDate(date)
-            return (allEventsDates.includes(fullDate) && today<=date ? 'day-event' : null)
+            const fullDate = moment(date).format("YYYY-MM-DD")
+            return (allDatesAfterYesteday.includes(fullDate) ? 'day-event' : null)
           }}
           onClickDay={(value) => {
-            const fullDate = getFullDate(value)
-            setChosenDate(fullDate)
+            setChosenDate(value)
           }}
         />
         <div className="events-container">
@@ -123,10 +102,10 @@ const Events = () => {
                 const slug = evento.node.mostrare && !!evento.node.slug ? evento.node.slug : null
                 return (
                   <EventDisplay
-                    expired={new Date(evento.node.dataEventoShort)<today}
+                    expired={moment().isAfter(evento.node.dataEvento)}
                     index={index}
                     titolo={evento.node.titoloEvento}
-                    data={evento.node.dataEventoAll}
+                    data={evento.node.dataEvento}
                     location={evento.node.location}
                     slug={slug}
                   />
