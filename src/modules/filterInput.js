@@ -4,11 +4,13 @@ const FilterInput = (props) => {
   return (
     <div>
       <input
-        type="text"
+        type="text" 
         aria-label="Search"
         placeholder="Type to filter posts..."
-        onChange={props.handleInputChange}
-      />
+        onChange={props.handleValueChange}
+        // value={props.value}
+        />
+      <button onClick={props.handleValueChange} value="chiesa">Chiesa</button>
       <span className={props.cName}>Posts displayed: {props.postShowing}</span>
     </div>
   )

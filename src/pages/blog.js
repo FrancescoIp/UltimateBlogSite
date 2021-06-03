@@ -7,7 +7,7 @@ import Seo from '../components/seo.js'
 import FilterInput from '../modules/filterInput'
 
 
-const BlogPage = () => {
+const BlogPage = ({ location }) => {
   const data = useStaticQuery(graphql`
      query {
   allContentfulBlogPost(sort: { fields: publishedDate, order: DESC }) {
@@ -34,9 +34,15 @@ const BlogPage = () => {
     query: emptyQuery,
   })
 
-  const handleInputChange = event => {
-    const query = event.target.value
+  const [queryFilter, setQueryFilter] = useState(location.state.data?location.state.data:"")
 
+  const handleValueChange = event => {
+    setQueryFilter(event.target.value)
+    console.log(queryFilter)
+  }
+
+  useEffect(() => {
+    const query = queryFilter
     const posts = data.allContentfulBlogPost.edges || []
 
     const filteredData = posts.filter(post => {
@@ -52,7 +58,8 @@ const BlogPage = () => {
       query,
       filteredData,
     })
-  }
+
+  }, [queryFilter])
 
   const { filteredData, query } = state
   const hasSearchResults = filteredData && query !== emptyQuery
@@ -60,10 +67,7 @@ const BlogPage = () => {
   const polishedPosts = posts.filter(post => {
     return (post.node.slug !== null && post.node.mostrare)
   })
-  const [postShowing, setPostShowing] = useState(polishedPosts.length)
-  useEffect(() => {
-    setPostShowing(polishedPosts.length)
-  }, [polishedPosts])
+
 
   return (
     <Layout>
@@ -73,10 +77,12 @@ const BlogPage = () => {
       />
       <h1>Blog</h1>
       <FilterInput
-        handleInputChange={handleInputChange}
+        handleValueChange={handleValueChange}
+        // handleInputChange={handleInputChange}
         cName={blogStyle.numberPostShown}
-        postShowing={postShowing}
+        postShowing={polishedPosts.length}
       />
+
       <ol className={blogStyle.posts}>
         {polishedPosts.map((edge) => {
           const image = getImage(edge.node.immagineCopertina)

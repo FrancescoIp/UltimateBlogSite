@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from 'gatsby';
 import Seo from '../components/seo.js'
 import Header from '../components/header'
 import Footer from '../components/footer'
@@ -22,13 +23,10 @@ function Home({ data }) {
         <div className={layoutStyles.content} style={styleZ}>
           <Header />
         </div>
-        <div style={{ textAlign: 'center' }}>
-          <h3>La Guida della città di Termini Imerese</h3>
-          <p>Tutte le informazioni utili per muoversi e sapere cosa fare a Termini Imerese</p>
-        </div>
       </div>
       <Parallax/>
       <div className={layoutStyles.container}>
+        <Link to="/blog" state={{ data: "chiesa" }}>Chiesa</Link>
         <div>
           <Video
             videoSrcURL="https://www.youtube.com/embed/auBb12TIl5Y"
