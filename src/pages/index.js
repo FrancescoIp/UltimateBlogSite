@@ -26,7 +26,7 @@ function Home({ data }) {
       </div>
       <Parallax/>
       <div className={layoutStyles.container}>
-        <BlogPreview/>
+        <BlogPreview tags={"Chiese"}/>
         <div>
           <VideoSection/>
         </div>

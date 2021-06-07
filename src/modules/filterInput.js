@@ -11,6 +11,7 @@ const FilterInput = (props) => {
         // value={props.value}
         />
       <button onClick={props.handleValueChange} value="chiesa">Chiesa</button>
+      <button onClick={props.handleValueChange} value="">All</button>
       <span className={props.cName}>Posts displayed: {props.postShowing}</span>
     </div>
   )

@@ -16,9 +16,13 @@ const BlogPage = ({ location }) => {
         title
         slug
         mostrare
+        tags
         publishedDate(formatString:"MMMM Do, YYYY")
         immagineCopertina {
-          gatsbyImageData(width: 200)
+          gatsbyImageData(
+            width: 200
+
+            )
         }
       }
     }
@@ -38,19 +42,19 @@ const BlogPage = ({ location }) => {
 
   const handleValueChange = event => {
     setQueryFilter(event.target.value)
-    console.log(queryFilter)
   }
 
   useEffect(() => {
     const query = queryFilter
-    const posts = data.allContentfulBlogPost.edges || []
+    const posts = allPosts || []
 
     const filteredData = posts.filter(post => {
-      const { title, slug } = post.node
+      const { title, slug, tags } = post.node
       return (
         // standardize data with .toLowerCase()
         slug.toLowerCase().includes(query.toLowerCase()) ||
-        title.toLowerCase().includes(query.toLowerCase())
+        title.toLowerCase().includes(query.toLowerCase()) ||
+        tags.toLowerCase().includes(query.toLowerCase())
       )
     })
 
@@ -59,7 +63,8 @@ const BlogPage = ({ location }) => {
       filteredData,
     })
 
-  }, [queryFilter])
+
+  }, [queryFilter,allPosts])
 
   const { filteredData, query } = state
   const hasSearchResults = filteredData && query !== emptyQuery
@@ -90,7 +95,7 @@ const BlogPage = ({ location }) => {
             <li className={blogStyle.post} key={edge.node.title}>
               <Link to={`/blog/${edge.node.slug}`}>
                 <div className={blogStyle.postDataContainer}>
-                  <GatsbyImage image={image} alt={edge.node.slug} />
+                  {image && <GatsbyImage image={image} alt={edge.node.slug} />}
                   <div className={blogStyle.datiPost}>
                     <h2>{edge.node.title}</h2>
                     <p>{edge.node.publishedDate}</p>
