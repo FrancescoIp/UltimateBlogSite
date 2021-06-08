@@ -1,0 +1,31 @@
+.filter{
+  .button-container{
+    margin: 1rem 0;
+    text-align: center;
+  }
+  button{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 1px;
+  }
+  button:hover{
+    background: rgb(170, 170, 170);
+  }
+  button:active{
+    background: rgb(102, 102, 102);
+  }
+}
+
+$columns: 12;
+
+@for $i from 1 through $columns{
+  .col-#{$i}{
+    flex: 0 0 100% / $columns * $i
+  }
+    
+  .col-offset-#{$i}{
+    margin-left: 100% / $columns * $i
+  }
+    
+}
+

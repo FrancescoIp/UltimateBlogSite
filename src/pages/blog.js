@@ -20,7 +20,7 @@ const BlogPage = ({ location }) => {
         publishedDate(formatString:"MMMM Do, YYYY")
         immagineCopertina {
           gatsbyImageData(
-            width: 200
+            width: 150
 
             )
         }
@@ -83,8 +83,6 @@ const BlogPage = ({ location }) => {
       <h1>Blog</h1>
       <FilterInput
         handleValueChange={handleValueChange}
-        // handleInputChange={handleInputChange}
-        cName={blogStyle.numberPostShown}
         postShowing={polishedPosts.length}
       />
 

@@ -1,9 +1,12 @@
+$himera-yellow: #ffc600;
+
 .posts {
   list-style-type: none;
   margin: 0;
 }
 
 .post {
+  border: 2px solid $himera-yellow;
   margin: 1rem 0;
   a{
     background: #f4f4f4;
@@ -35,6 +38,3 @@
   }
 }
 
-.numberPostShown {
-  margin-left: 1rem;
-}

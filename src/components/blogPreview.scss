@@ -1,9 +1,10 @@
 $himera-yellow: #ffc600;
 
 .blog-card-container{
+  width: 100%;
   padding: 0.3em;
   margin: 2px;
-  border: 2px solid rgb(128, 128, 128);
+  border: 2px solid $himera-yellow;
   border-radius: 10px;
   background: #f4f4f4;
   color: #000000;
@@ -31,14 +32,18 @@ $himera-yellow: #ffc600;
   }
 }
 
+.row-blogPreview{
+  @media (min-width: 45rem) {
+    display: flex;
+  }
+  flex-wrap: wrap;
+}
+
 .row{
   display: flex;
   flex-wrap: wrap;
 }
 
-.margine-tpmd{
-  margin-top: calc(9% - 20px);
-}
 .margine-top-card-dx{
   margin-top: 5%;
 }
@@ -68,4 +73,6 @@ $columns: 12;
   justify-content: center;
   align-items: center; 
 }
+
+
   

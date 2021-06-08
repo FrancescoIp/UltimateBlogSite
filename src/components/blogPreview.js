@@ -30,10 +30,8 @@ const BlogPreview = (props) => {
     return (post.node.slug !== null && post.node.mostrare && post.node.tags === props.tags)
   })
 
-  const blogCardData = postToShow.map((post, index) => {
-    let slug = post.node.slug
-    let title = post.node.title
-    let image = post.node.immagineCopertina
+  const blogCardData = postToShow.map((post) => {
+    const {slug, title, immagineCopertina: image} = post.node
     return (
       {
         image,
@@ -45,7 +43,7 @@ const BlogPreview = (props) => {
 
   return (
     <>
-      <div className="row blog-previw-margin-wrapper ">
+      <div className="row-blogPreview blog-previw-margin-wrapper ">
         <div className="col-12">
           <Link className="blog-preview-title" to="/blog" state={{ data: props.tags }}>
             <h2 >Le chiese di Termini</h2>
