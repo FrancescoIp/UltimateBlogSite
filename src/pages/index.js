@@ -6,7 +6,7 @@ import Sidebar from '../components/sidebar'
 import VideoSection from '../components/videoSection'
 import Parallax from '../modules/parallax'
 import BlogPreview from '../components/blogPreview'
-import * as layoutStyles from '../components/layout.module.scss'
+import '../components/layout.scss'
 
 
 const styleZ = {
@@ -19,14 +19,14 @@ function Home({ data }) {
     <>
       <Seo title="Home" />
       <Sidebar />
-      <div className={layoutStyles.container}>
-        <div className={layoutStyles.content} style={styleZ}>
+      <div className="container">
+        <div className="content" style={styleZ}>
           <Header />
         </div>
       </div>
       <Parallax/>
-      <div className={layoutStyles.container}>
-        <BlogPreview tags={"Chiese"}/>
+      <div className="container">
+        <BlogPreview tags={"Chiese"} titoloComponente={"Le chiese di Termini"}/>
         <div>
           <VideoSection/>
         </div>

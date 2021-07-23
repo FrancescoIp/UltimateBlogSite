@@ -9,7 +9,7 @@ import Seo from '../components/seo.js'
 import Sidebar from '../components/sidebar'
 import EventDisplay from '../components/eventsDisplay'
 import './events.scss'
-import * as layoutStyles from '../components/layout.module.scss'
+import '../components/layout.scss'
 
 
 
@@ -41,34 +41,40 @@ const Events = () => {
     setChosenDate(firstDayWithEvents)
   }
 
-  const dynamicDate = (date) => {
-    const theDate = moment(date).format("D-MM-YYYY")
-    const isTheFirst = moment(date).format("D")
-    return `${isTheFirst ? "l' " : "il "}${theDate}`
-  }
-
   const allDatesAfterYesteday = allPosts.reduce((accumulator, currentEvent) => {
-    if (currentEvent.node.evento && moment(todayM).isSameOrBefore(currentEvent.node.dataEvento)) {
+    if (currentEvent.node.evento) {
       accumulator.push(currentEvent.node.dataEvento)
     }
-    return accumulator.sort((a, b) => a - b)
+    return accumulator.sort((a, b) => {
+      a = a.split('-').reverse().join('');
+      b = b.split('-').reverse().join('');
+      return a > b ? -1 : a < b ? 1 : 0
+    })
   }, [])
 
   const firstDayWithEvents = allDatesAfterYesteday[0]
+
+  const dynamicDate = (day) => {
+    const theDate = moment(day).format("D-MM-YYYY")
+    const isTheFirst = moment(day).format("D") === "1"
+    return `${isTheFirst ? "l' " : "il "}${theDate}`
+  }
 
   const eventsToShow = allPosts.filter(event => {
     return (event.node.evento && moment(event.node.dataEvento).isSame(chosenDate))
   })
 
+
+
   const NoEventsToShow = () => {
     return (
       <div style={{ marginTop: "1rem", textAlign: "center" }}>
         <h4>Nessun evento in programma per oggi.</h4>
-        <p>Prossimo evento
+        {moment().isBefore(firstDayWithEvents) && <p>Prossimo evento
           <button id="goToDate" onClick={changeDay}>
             {dynamicDate(firstDayWithEvents)}
           </button>
-        </p>
+        </p>}
       </div>
     )
   }
@@ -77,8 +83,8 @@ const Events = () => {
     <>
       <Seo title="Eventi" />
       <Sidebar />
-      <div className={layoutStyles.container}>
-        <div className={layoutStyles.content}>
+      <div className="container">
+        <div className="content">
           <Header />
         </div>
         <h1 style={{ textAlign: "center" }}>
@@ -115,7 +121,7 @@ const Events = () => {
           }
         </div>
       </div>
-      <div className={layoutStyles.container}>
+      <div className="container">
         <Footer />
       </div>
     </>

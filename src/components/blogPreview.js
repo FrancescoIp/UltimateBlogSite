@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import BlogCard from '../modules/previwBlogCard'
 import './blogPreview.scss'
+import '../modules/grid.scss'
+
 
 const BlogPreview = (props) => {
   const data = useStaticQuery(graphql`
@@ -46,7 +48,7 @@ const BlogPreview = (props) => {
       <div className="row-blogPreview blog-previw-margin-wrapper ">
         <div className="col-12">
           <Link className="blog-preview-title" to="/blog" state={{ data: props.tags }}>
-            <h2 >Le chiese di Termini</h2>
+            <h2 >{props.titoloComponente}</h2>
           </Link>
         </div>
         <div className="row col-6">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './filterInput.scss'
+import './grid.scss'
 
 const FilterInput = (props) => {
 
@@ -41,7 +42,15 @@ const FilterInput = (props) => {
   console.log(dimension)
   return (
     <div className="row filter">
-      <div className="col-12 button-container">
+      <div className="col-10 col-offset-1 button-container">
+        <button onClick={props.handleValueChange} value="">All</button>
+        <button onClick={props.handleValueChange} value="Chiese">Chiese</button>
+        <button onClick={props.handleValueChange} value="Musei">Musei</button>
+        <button onClick={props.handleValueChange} value="Cultura">Cultura</button>
+        <button onClick={props.handleValueChange} value="">All</button>
+        <button onClick={props.handleValueChange} value="Chiese">Chiese</button>
+        <button onClick={props.handleValueChange} value="Musei">Musei</button>
+        <button onClick={props.handleValueChange} value="Cultura">Cultura</button>
         <button onClick={props.handleValueChange} value="">All</button>
         <button onClick={props.handleValueChange} value="Chiese">Chiese</button>
         <button onClick={props.handleValueChange} value="Musei">Musei</button>

@@ -53,20 +53,6 @@ $himera-yellow: #ffc600;
 .blog-previw-margin-wrapper{
   margin: 1.5rem 0;
 }
- 
-
-$columns: 12;
-
-@for $i from 1 through $columns{
-  .col-#{$i}{
-    flex: 0 0 100% / $columns * $i
-  }
-    
-  .col-offset-#{$i}{
-    margin-left: 100% / $columns * $i
-  }
-    
-}
 
 .center {
   display: flex;

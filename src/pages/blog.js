@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../components/layout'
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import * as blogStyle from './blog.module.scss'
+import './blog.scss' 
 import Seo from '../components/seo.js'
 import FilterInput from '../modules/filterInput'
 
@@ -86,15 +86,15 @@ const BlogPage = ({ location }) => {
         postShowing={polishedPosts.length}
       />
 
-      <ol className={blogStyle.posts}>
+      <ol className="posts">
         {polishedPosts.map((edge) => {
           const image = getImage(edge.node.immagineCopertina)
           return (
-            <li className={blogStyle.post} key={edge.node.title}>
+            <li className="B-post" key={edge.node.title}>
               <Link to={`/blog/${edge.node.slug}`}>
-                <div className={blogStyle.postDataContainer}>
+                <div className="post-data-container">
                   {image && <GatsbyImage image={image} alt={edge.node.slug} />}
-                  <div className={blogStyle.datiPost}>
+                  <div className="dati-post">
                     <h2>{edge.node.title}</h2>
                     <p>{edge.node.publishedDate}</p>
                   </div>
