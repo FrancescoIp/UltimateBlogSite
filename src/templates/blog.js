@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Layout from '../components/layout';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { BLOCKS, INLINES } from "@contentful/rich-text-types"
@@ -50,6 +50,7 @@ const Blog = (props) => {
       <h1>{props.data.contentfulBlogPost.title}</h1>
       <p>{props.data.contentfulBlogPost.publishedDate}</p>
       {renderRichText(props.data.contentfulBlogPost.body, options)}
+      <Link to={"/blog"}>Torna indietro</Link>
     </Layout>
   )
 }

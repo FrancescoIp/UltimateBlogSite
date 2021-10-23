@@ -1,17 +1,12 @@
 import React from "react"
 import Seo from '../components/seo.js'
-import Header from '../components/header'
-import Footer from '../components/footer'
 import Sidebar from '../components/sidebar'
 import VideoSection from '../components/videoSection'
 import Parallax from '../modules/parallax'
 import BlogPreview from '../components/blogPreview'
+import Layout from '../components/layout'
 import '../components/layout.scss'
 
-
-const styleZ = {
-  overflow: 'auto'
-}
 
 function Home({ data }) {
 
@@ -19,19 +14,13 @@ function Home({ data }) {
     <>
       <Seo title="Home" />
       <Sidebar />
-      <div className="container">
-        <div className="content" style={styleZ}>
-          <Header />
-        </div>
-      </div>
-      <Parallax/>
-      <div className="container">
-        <BlogPreview tags={"Chiese"} titoloComponente={"Le chiese di Termini"}/>
+      <Layout>
+        <Parallax />
         <div>
-          <VideoSection/>
+          <VideoSection />
         </div>
-        <Footer />
-      </div>
+        <BlogPreview tags={"Chiese"} titoloComponente={"Le chiese di Termini"} />
+      </Layout>
     </>
   )
 }

@@ -7,6 +7,7 @@ import Seo from '../components/seo.js'
 import FilterInput from '../modules/filterInput'
 
 
+
 const BlogPage = ({ location }) => {
   const data = useStaticQuery(graphql`
      query {
