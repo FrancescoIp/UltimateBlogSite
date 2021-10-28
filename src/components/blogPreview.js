@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
+import { Row, Col} from 'react-bootstrap'
 import BlogCard from '../modules/previwBlogCard'
 import './blogPreview.scss'
 import '../modules/grid.scss'
@@ -17,9 +18,11 @@ const BlogPreview = (props) => {
         tags
         publishedDate(formatString:"MMMM Do, YYYY")
         immagineCopertina {
-          gatsbyImageData(
-            width:150
-            )
+          gatsbyImageData (
+            width: 200
+            placeholder: BLURRED
+            aspectRatio: 0.7
+          )
         }
       }
     }
@@ -33,32 +36,34 @@ const BlogPreview = (props) => {
   })
 
   const blogCardData = postToShow.map((post) => {
-    const {slug, title, immagineCopertina: image} = post.node
+    const { slug, title, immagineCopertina: image } = post.node
     return (
       {
-        image,
         slug,
-        title
+        title,
+        image
       }
     )
-  })
+  });
 
   return (
     <>
-      <div className="row-blogPreview blog-previw-margin-wrapper ">
-        <div className="col-12">
-          <Link className="blog-preview-title" to="/blog" state={{ data: props.tags }}>
-            <h2 >{props.titoloComponente}</h2>
+      <Row className="m-3 justify-content-around">
+        <Col xs={12}>
+          <Link to="/blog" state={{ data: props.tags }}>
+            <h2>{props.titoloComponente}</h2>
           </Link>
-        </div>
-        <div className="row col-6">
-          <BlogCard blogCardData={blogCardData[0]} type="rx" />
-        </div>
-        <div className="row col-6">
-          <BlogCard blogCardData={blogCardData[1]} type="sx" />
-          <BlogCard blogCardData={blogCardData[2]} type="sx" />
-        </div>
-      </div>
+        </Col>
+        <Col xs={3} >
+          <BlogCard blogCardData={blogCardData[0]} />
+        </Col>
+        <Col xs={3} >
+          <BlogCard blogCardData={blogCardData[1]} />
+        </Col>
+        <Col xs={3}>
+          <BlogCard blogCardData={blogCardData[2]} />
+        </Col>
+      </Row>
     </>
   )
 }

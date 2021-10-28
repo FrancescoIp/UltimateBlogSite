@@ -1,0 +1,32 @@
+#responsive-navbar-nav .nav-link {
+  text-align: center;
+}
+
+#logo_img{
+  width: 50%;
+}
+
+.container-fluid .navbar-brand{
+  text-align: center;
+  margin-right: 0;
+}
+
+.display-none{
+  -webkit-transition: visibility opacity 0.5s linear;;
+  -moz-transition: visibility opacity 0.5s linear;;
+  -o-transition: visibility opacity 0.5s linear;;
+  -ms-transition: visibility opacity 0.5s linear;;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility opacity 0.5s linear;
+}
+
+.dispay-yes{
+  -webkit-transition: visibility opacity 0.5s linear;;
+  -moz-transition: visibility opacity 0.5s linear;;
+  -o-transition: visibility opacity 0.5s linear;;
+  -ms-transition: visibility opacity 0.5s linear;;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility opacity 0.5s linear;
+}

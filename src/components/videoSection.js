@@ -1,25 +1,26 @@
 import React from 'react';
 import Video from '../modules/video'
+import {Col, Row} from 'react-bootstrap'
 import './videoSection.scss'
 
 
 const VideoSection = () => {
   return (
-    <div className="video-section-container">
-      <div className="section-video">
+    <Row className="justify-content-around">
+      <Col md={4} className="my-3">
         <Video
           videoSrcURL="https://www.youtube.com/embed/auBb12TIl5Y"
           videoTitle="Panoramica Termini Imerese"
         />
-      </div>
-      <div className="section-text">
+      </Col>
+      <Col md={4} className="my-3 ">
+
+        <h2>Chi Siamo?</h2>
         <p>
           testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.testo prova.
-      </p>
-      </div>
-
-
-    </div>
+        </p>
+      </Col>
+    </Row>
   )
 }
 
