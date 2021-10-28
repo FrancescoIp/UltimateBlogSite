@@ -49,18 +49,18 @@ const BlogPreview = (props) => {
   return (
     <>
       <Row className="m-3 justify-content-around">
-        <Col xs={12}>
+        <Col xs={12} className="pb-2">
           <Link to="/blog" state={{ data: props.tags }}>
             <h2>{props.titoloComponente}</h2>
           </Link>
         </Col>
-        <Col xs={3} >
+        <Col md={3} className="pb-2">
           <BlogCard blogCardData={blogCardData[0]} />
         </Col>
-        <Col xs={3} >
+        <Col md={3} className="pb-2">
           <BlogCard blogCardData={blogCardData[1]} />
         </Col>
-        <Col xs={3}>
+        <Col md={3} className="pb-2">
           <BlogCard blogCardData={blogCardData[2]} />
         </Col>
       </Row>

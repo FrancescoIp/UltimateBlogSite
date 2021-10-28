@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Layout from '../components/layout'
+import { Card, Row, Col } from 'react-bootstrap'
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import './blog.scss' 
+import './blog.scss'
 import Seo from '../components/seo.js'
 import FilterInput from '../modules/filterInput'
+import Layout from '../components/layout'
 
 
 
@@ -22,7 +23,8 @@ const BlogPage = ({ location }) => {
         immagineCopertina {
           gatsbyImageData(
             width: 150
-
+            placeholder: BLURRED
+            aspectRatio: 0.7
             )
         }
       }
@@ -39,7 +41,7 @@ const BlogPage = ({ location }) => {
     query: emptyQuery,
   })
 
-  const [queryFilter, setQueryFilter] = useState(location.state.data?location.state.data:"")
+  const [queryFilter, setQueryFilter] = useState(location.state.data ? location.state.data : "")
 
   const handleValueChange = event => {
     setQueryFilter(event.target.value)
@@ -65,7 +67,7 @@ const BlogPage = ({ location }) => {
     })
 
 
-  }, [queryFilter,allPosts])
+  }, [queryFilter, allPosts])
 
   const { filteredData, query } = state
   const hasSearchResults = filteredData && query !== emptyQuery
@@ -86,27 +88,29 @@ const BlogPage = ({ location }) => {
         handleValueChange={handleValueChange}
         postShowing={polishedPosts.length}
       />
-
-      <ol className="posts">
+      <Row xs={1} md={3} className="g-4 p-3">
         {polishedPosts.map((edge) => {
           const image = getImage(edge.node.immagineCopertina)
           return (
-            <li className="B-post" key={edge.node.title}>
+            <Col>
               <Link to={`/blog/${edge.node.slug}`}>
-                <div className="post-data-container">
+                <Card key={edge.node.title}>
                   {image && <GatsbyImage image={image} alt={edge.node.slug} />}
-                  <div className="dati-post">
-                    <h2>{edge.node.title}</h2>
+                  <Card.Body>
+                    <Card.Title><h2>{edge.node.title}</h2></Card.Title>
+                  </Card.Body>
+                  <Card.Footer>
                     <p>{edge.node.publishedDate}</p>
-                  </div>
-                </div>
+                  </Card.Footer>
+                </Card>
               </Link>
-            </li>
+            </Col>
           )
         })}
-      </ol>
+      </Row>
     </Layout>
   )
 }
 
 export default BlogPage
+

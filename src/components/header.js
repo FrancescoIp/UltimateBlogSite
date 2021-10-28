@@ -58,12 +58,12 @@ const Header = () => {
             </Nav.Item>
             <Nav.Item as="span">
               <Nav.Link eventKey="cosa-facciamo">
-                <Link to="/contactUs">Cosa Facciamo</Link>
+                <Link to="/#jardinu-section">Cosa Facciamo</Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item as="span">
               <Nav.Link eventKey="chi-siamo">
-                <Link to="/about">Chi Siamo</Link>
+                <Link to="/#chi-siamo">Chi Siamo</Link>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item as="span">

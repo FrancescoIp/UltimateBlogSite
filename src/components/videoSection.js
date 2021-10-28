@@ -6,7 +6,7 @@ import './videoSection.scss'
 
 const VideoSection = () => {
   return (
-    <Row className="justify-content-around">
+    <Row className="justify-content-around" id="chi-siamo">
       <Col md={4} className="my-3">
         <Video
           videoSrcURL="https://www.youtube.com/embed/auBb12TIl5Y"
