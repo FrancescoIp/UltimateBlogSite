@@ -6,7 +6,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text"
 import { Card, Col, Row } from 'react-bootstrap'
 import Seo from '../components/seo.js'
 import Layout from '../components/layout';
-import * as blogStyle from './blog.module.scss'
+import './blog.scss'
 
 export const query = graphql`
   query($slug: String!) {
@@ -31,7 +31,7 @@ export const query = graphql`
 }
 `
 
-const Links = ({ uri, children }) => <a href={uri} className={blogStyle.links}>{children}</a>
+const Links = ({ uri, children }) => <a href={uri} className="links">{children}</a>
 
 const Blog = (props) => {
 
@@ -48,7 +48,7 @@ const Blog = (props) => {
   return (
     <Layout>
       <Seo title={props.data.contentfulBlogPost.title} />
-      <Row className="justify-content-around">
+      <Row className="justify-content-around wrapper" style={{ minHeight: "100vh" }}>
         <Col xs={10} className="py-3">
           <Card>
             <Card.Body>
@@ -59,7 +59,7 @@ const Blog = (props) => {
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              <Link to={"/blog"}>Torna indietro</Link>
+              <Link to={"/blog"}>Torna al Blog</Link>
             </Card.Footer>
           </Card>
           </Col>

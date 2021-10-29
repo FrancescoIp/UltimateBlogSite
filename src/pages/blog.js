@@ -83,31 +83,34 @@ const BlogPage = ({ location }) => {
         title="Blog"
         description="Qui trovi tutti gli articoli suddivisi per categorie che raccontano della nostra bellissima città e non solo!"
       />
-      <h1>Blog</h1>
-      <FilterInput
-        handleValueChange={handleValueChange}
-        postShowing={polishedPosts.length}
-      />
-      <Row xs={1} md={3} className="g-4 p-3">
-        {polishedPosts.map((edge) => {
-          const image = getImage(edge.node.immagineCopertina)
-          return (
-            <Col>
-              <Link to={`/blog/${edge.node.slug}`}>
-                <Card key={edge.node.title}>
-                  {image && <GatsbyImage image={image} alt={edge.node.slug} />}
-                  <Card.Body>
-                    <Card.Title><h2>{edge.node.title}</h2></Card.Title>
-                  </Card.Body>
-                  <Card.Footer>
-                    <p>{edge.node.publishedDate}</p>
-                  </Card.Footer>
-                </Card>
-              </Link>
-            </Col>
-          )
-        })}
-      </Row>
+      <div className="wrapper-bg" style={{ minHeight: "100vh" }}>
+        <FilterInput
+          handleValueChange={handleValueChange}
+          postShowing={polishedPosts.length}
+        />
+        <Row xs={1} md={4} className="p-3" >
+          {polishedPosts.map((edge) => {
+            const image = getImage(edge.node.immagineCopertina)
+            return (
+              <Col className="py-2">
+                <Link to={`/blog/${edge.node.slug}`}>
+                  <Card key={edge.node.title}>
+                    {image && <GatsbyImage image={image} alt={edge.node.slug} />}
+                    <Card.Body>
+                      <Card.Title><h2>{edge.node.title}</h2></Card.Title>
+                    </Card.Body>
+                    <Card.Footer>
+                      <p>{edge.node.publishedDate}</p>
+                    </Card.Footer>
+                  </Card>
+                </Link>
+              </Col>
+            )
+          })}
+        </Row>
+      </div>
+
+
     </Layout>
   )
 }
