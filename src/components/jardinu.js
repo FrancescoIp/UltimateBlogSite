@@ -8,7 +8,7 @@ import './jardinu.scss'
 
 const Jardinu = () => {
   return (
-    <div className="wrapper py-3" id="jardinu-section">
+    <div className="wrapper" id="jardinu-section">
       <div className=" text-bg container">
         <Row className="pt-3">
           <Col xs={12} className="py-3" >
