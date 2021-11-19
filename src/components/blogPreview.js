@@ -48,6 +48,7 @@ const BlogPreview = (props) => {
 
   return (
     <>
+       {/* ciao */}
       <Row className="m-3 justify-content-around">
         <Col xs={12} className="pb-2">
           <Link to="/blog" state={{ data: props.tags }}>
