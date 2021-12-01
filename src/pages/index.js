@@ -5,6 +5,7 @@ import BlogPreview from '../components/blogPreview'
 import HeroB from '../components/heroImageB'
 import Layout from '../components/layout'
 import Jardinu from '../components/jardinu'
+import './index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -14,10 +15,12 @@ function Home({ data }) {
     <>
       <Seo title="Home" />
       <Layout>
-        <HeroB/>
-        <Jardinu/>
-        <VideoSection />
-        <BlogPreview tags={"Chiese"} titoloComponente={"Le chiese di Termini"} />
+        <HeroB />
+        <Jardinu />
+        <div id="gradient">
+          <VideoSection />
+          <BlogPreview tags={"Chiese"} titoloComponente={"Le chiese di Termini"} />
+        </div>
       </Layout>
     </>
   )

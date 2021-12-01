@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <>
-      <Navbar sticky="top" className={isHide} expand='md' bg="light">
+      <Navbar fixed="top" className="dispay-yes" expand='md' bg="light">
         <Container fluid>
           <Navbar.Brand className="logo_container" >
             <Link to="/"><img id="logo_img" src={Logo} alt="LOGO"></img></Link>
